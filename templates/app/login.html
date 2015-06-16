@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>RankBomb</title>
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,300,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+        <script src="{% static "js/jquery-1.11.2.min.js" %}"></script>
+    
+    </head>
+    <body ng-app="rankBomb" ng-controller="MainCtrl" class="ng-scope">
+      <div class="page-header ng-binding ng-scope">
+        <h1>Please Login</h1><br>
+        {% if reason %}
+            <h3>{{ reason }}</h3>
+        {% endif %}
+            <div class="center">
+                <form class="form-signin" action="/login/" method="post">
+                    {% csrf_token %}
+       				<input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="">
+       				<input type="password" class="form-control" name="password" placeholder="Password" required="">
+       				<input type="submit" class="btn btn-lg btn-default btn-block" value="Sign In">
+                </form>
+            </div>
+      </div>
+    </body>
+</html>

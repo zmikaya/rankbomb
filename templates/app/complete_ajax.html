@@ -1,0 +1,15 @@
+<div class="page-header ng-scope">
+    <p>Thank you for taking the survey.</p>
+    <a href="/">Go back to home</a>
+
+  	<br>
+    The following ranking was determined by your choices: 
+    {% if results %}
+      {% for result in results %}
+        <div id="{{ result }}">
+        	{{ result }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+</div>

@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>RankBomb</title>
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "css/dropdowns-enhancement.css" %}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,300,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+        <script src="{% static "js/jquery-1.11.2.min.js" %}"></script>
+        <script src="{% static "js/dropdowns-enhancement.js" %}"></script>
+    
+    </head>
+    <body ng-app="rankBomb" ng-controller="MainCtrl" class="ng-scope">
+      <div class="page-header ng-binding ng-scope">
+        <h1>Retrieve Data</h1><br>
+            <div class="profile_center">
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" id="compType">soccer<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <input type="radio" id="ex1_1" name="ex1" value="1" checked="">
+                      <label for="ex1_1">soccer</label>
+                    </li>
+                    <li>
+                      <input type="radio" id="ex1_2" name="ex1" value="2">
+                      <label for="ex1_2">rappers</label>
+                    </li>
+                    <li>
+                      <input type="radio" id="ex1_3" name="ex1" value="3">
+                      <label for="ex1_3">math</label>
+                    </li>
+                    <li>
+                      <input type="radio" id="ex1_4" name="ex1" value="4">
+                      <label for="ex1_4">movies</label>
+                    </li>
+                    <li>
+                      <input type="radio" id="ex1_5" name="ex1" value="5">
+                      <label for="ex1_5">musicians</label>
+                    </li>
+                    <li>
+                      <input type="radio" id="ex1_6" name="ex1" value="6">
+                      <label for="ex1_6">places</label></label>
+                    </li>
+                    <li>
+                      <input type="radio" id="ex1_7" name="ex1" value="7">
+                      <label for="ex1_7">numbers</label>
+                    </li>
+                  </ul>
+                </div>
+                <!--<div class="btn-group">-->
+                <!--  <button class="btn btn-default download">download<span></span></button>-->
+                <!--</div>-->
+                <form class="form-signin" action="/data/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" class="form-control" id="selection" name="compType">
+                    <div class="btn-group">
+                      <input type="submit" class="btn btn-default download" value="download">
+                    </div>
+                </form>
+            </div>
+      </div>
+      <!--Script placed here to avoid load issues-->
+      <script src="{% static "js/admin.js" %}"></script>
+    </body>
+</html>

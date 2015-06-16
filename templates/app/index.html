@@ -1,0 +1,50 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>RankBomb</title>
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,300,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+        <script src="{% static "js/jquery-1.11.2.min.js" %}"></script>
+    
+    </head>
+    <body>
+        <div class="page-header ng-scope">
+    		<h2>Welcome to,</h2>
+    		<div style="line-height:95%; padding-bottom:5px">
+    			<h1 class="rankbomb"><font color="#d6cf90">Rank</font>bomb</h1>
+    			<!--<h3>Where you pit two people head on to determine the best.</h3>-->
+    			<h2>We are currently ranking several objects based on their POPULARITY.</h2>
+    		    <h2>We'd love to incorporate your opinion in deciding what's better.</h2>
+    		    <h2>Every choice you make MATTERS!</h2>
+    		</div>
+    		<hr>
+    		<div id="instructions">
+    			<p>You will be shown multiple pairs of objects. Click on the person you think is better! Ready?</p>
+    		</div>
+    		<br>
+    		<br>
+    		<div>
+    			<!--<button class="btn">START HERE</button>-->
+    			<a href="soccer/#openModal"><button class="btn">Soccer Players</button></a>
+    			<a href="/math/#openModal"><button class="btn">Mathematicians</button></a>
+    			<a href="/rappers/#openModal"><button class="btn">Rappers</button></a>
+    			<a href="/movies/#openModal"><button class="btn">Movies</button></a>
+    			<a href="/musicians/#openModal"><button class="btn">Musicians</button></a>
+    			<!--<a href="/colors/#openModal"><button class="btn">Colors</button></a>-->
+    			<a href="/places/#openModal"><button class="btn">Famous Places</button></a>
+    			<a href="/numbers/#openModal"><button class="btn">Numbers</button></a>
+    			<!--<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials-->
+                <!--<span class="caret"></span></button>-->
+                <!--<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">-->
+                <!--  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>-->
+                <!--  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>-->
+                <!--  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>-->
+                <!--  <li role="presentation" class="divider"></li>-->
+                <!--  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>-->
+                <!--</ul>-->
+    		</div>
+    	</div>
+    </body>
+</html>
