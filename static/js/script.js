@@ -369,11 +369,11 @@ function getTopChoices(mode){
     $("#test2").text(second[0])
     // stop the survey if not valid number result
     console.log(first[0])
-    if (compType == "numbers"){
-        if (first[0] != 1703 || second[0] != 1498){
-            $("form").empty()
-            $("form").append("<h2>Something Went Wrong!</h2>")
-        }
-    }
+    // if (compType == "numbers"){
+    //     if (first[0] != 1703 || second[0] != 1498){
+    //         $("form").empty()
+    //         $("form").append("<h2>Something Went Wrong!</h2>")
+    //     }
+    // }
 }
     

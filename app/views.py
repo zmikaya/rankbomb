@@ -19,37 +19,37 @@ def index(request):
 
 @ensure_csrf_cookie
 def soccer(request):
-    context_dict = {'CType': 'Choose the better soccer player'}
+    context_dict = {'CType': 'Choose the soccer player who is more talented'}
     context_dict["username"] = get_username(request)
     return render(request, 'app/survey.html', context_dict)
 
 @ensure_csrf_cookie
 def math(request):
-    context_dict = {'CType': 'Choose the better mathematician'}
+    context_dict = {'CType': 'Choose the mathematician who is more gifted'}
     context_dict["username"] = get_username(request)
     return render(request, 'app/survey.html', context_dict)
     
 @ensure_csrf_cookie
 def rappers(request):
-    context_dict = {'CType': 'Choose the better rapper'}
+    context_dict = {'CType': 'Choose the rapper who is a better artist'}
     context_dict["username"] = get_username(request)
     return render(request, 'app/survey.html', context_dict)
     
 @ensure_csrf_cookie
 def movies(request):
-    context_dict = {'CType': 'Choose the better movie'}
+    context_dict = {'CType': 'Choose the movie that you like better'}
     context_dict["username"] = get_username(request)
     return render(request, 'app/survey.html', context_dict)
     
 @ensure_csrf_cookie
 def musicians(request):
-    context_dict = {'CType': 'Choose the better musician'}
+    context_dict = {'CType': 'Choose the classical musician who is more talented'}
     context_dict["username"] = get_username(request)
     return render(request, 'app/survey.html', context_dict)
     
 @ensure_csrf_cookie
 def colors(request):
-    context_dict = {'CType': 'Choose the darker color'}
+    context_dict = {'CType': 'Choose the color that is darker'}
     context_dict["username"] = get_username(request)
     return render(request, 'app/survey.html', context_dict)
     
@@ -61,7 +61,7 @@ def places(request):
     
 @ensure_csrf_cookie
 def numbers(request):
-    context_dict = {'CType': 'Choose the bigger number'}
+    context_dict = {'CType': 'Choose the number which is bigger in terms of value'}
     context_dict["username"] = get_username(request)
     return render(request, 'app/survey.html', context_dict)
 

@@ -16,7 +16,7 @@
             <h3>{{ reason }}</h3>
         {% endif %}
             <div class="center">
-                <form class="form-signin" action="/login" method="post">
+                <form class="form-signin" action="/login/" method="post">
                     {% csrf_token %}
        				<input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="">
        				<input type="password" class="form-control" name="password" placeholder="Password" required="">
