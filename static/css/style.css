@@ -212,3 +212,15 @@ table {
 .modalHeading {
   color: black;
 }
+
+#familiarityDiv {
+  display: none;
+}
+
+/*admin section (Note: some styles may be in disparite locations above)*/
+
+input[type="radio"] {
+  margin-right: 4px;
+}
+
+/*admin section*/

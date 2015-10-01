@@ -1,6 +1,5 @@
 <div class="page-header ng-scope">
-    <p>Thank you for taking the survey.</p>
-    <a href="/">Go back to home</a>
+    <!--<p>Thank you for taking the survey.</p>-->
 
   	<br>
     The following ranking was determined by your choices: 
@@ -11,5 +10,28 @@
         </div>
       {% endfor %}
     {% endif %}
-
+    </b>
+    {% if next_ctype != "end" %}
+      <form class="form-signin" action="/{{next_ctype}}/#openModal" method="post">
+        {% csrf_token %}
+   			<input type="hidden" name="username" value="{{username}}"><br><br>
+   			<input type="submit" class="btn btn-sm btn-default" value="Press to Continue">
+      </form>
+      <div class="container">
+      <h2>Progress</h2>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{completed}}" aria-valuemin="0" aria-valuemax="{{num_ctype}}" style="width:100%">
+            {{completed}}/{{num_ctype}} sections completed
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <form class="form-signin" action="/{{next_ctype}}/#openModal" method="post">
+        {% csrf_token %}
+   			<input type="hidden" name="username" value="{{username}}"><br><br>
+   			<input type="submit" class="btn btn-sm btn-default" value="Press to Complete">
+      </form>
+      <h2>The End!</h2>
+      <h2>Thank you for your participation.</h2>
+    {% endif %}
 </div>

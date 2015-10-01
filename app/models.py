@@ -9,6 +9,7 @@ class choiceData(models.Model):
     TTChoose = models.CharField(max_length=5000)
     CTime = models.CharField(max_length=1000)
     ip = models.CharField(max_length=128, default=0)
+    familiarity = models.BooleanField()
     # userInfo = models.CharField(max_length=300, default=0)
 
     class Meta:

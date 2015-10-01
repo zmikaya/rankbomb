@@ -20,6 +20,8 @@ class Migration(migrations.Migration):
                 ('choices', models.CharField(max_length=5000)),
                 ('TTChoose', models.CharField(max_length=5000)),
                 ('CTime', models.CharField(max_length=1000)),
+                ('ip', models.CharField(default=0, max_length=128)),
+                ('familiarity', models.BooleanField()),
             ],
             options={
                 'verbose_name_plural': 'Choice Data',

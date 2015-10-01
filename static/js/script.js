@@ -80,6 +80,16 @@ if (url.indexOf("numbers") > -1){
                         [5,'1703']];
 }
 
+if (url.indexOf("presidents") > -1){
+    // The table relates our combination # to the stored image name
+    var compType = 'presidents';
+    var lookupTable =   [[1,'Barack Obama'],
+                        [2,'Bill Clinton'],
+                        [3,'Jimmy Carter'],
+                        [4,'John F Kennedy'],
+                        [5,'Lyndon Johnson']];
+}
+
 // cache images to improve loading times
 // this function is important for optimization to minimize potential lag-time
 $.preLoadImages = function(urls) {
@@ -246,6 +256,15 @@ $("#start").click(
 )
 
 
+// On last image create modal box to get familiarity
+$(".Images").click(function() {
+    if (count == maxCount) {
+        // clear old html to replace with familiarity question
+        $(".page-header").remove()
+        $("#familiarityDiv").css("display", "inline")
+        
+    }
+})
 
 // on an image click we will change the matchup (handled in html)
 
@@ -267,24 +286,31 @@ function getCookie(name) {
 }
 
 var csrftoken = getCookie('csrftoken');
-$('.Images').click(function(){
+$('#done').click(function(){
     if (count == maxCount){
-       var  matchupNames = getNames(matchArray);
-        $.ajax({
-          type: "POST",
-          url: "/complete/",
-          data: {
-              'compType': compType,
-              'matchupNames': JSON.stringify(matchupNames),
-              'choices': JSON.stringify(choices),
-              'TTChoose': JSON.stringify(TTChoose),
-              'Time': JSON.stringify(Date()),
-              'username': username,
-              'csrfmiddlewaretoken': csrftoken
-            },
-            success: surveySuccess,
-            dataType: 'html'
-        });
+      var  matchupNames = getNames(matchArray);
+      var familiarity = getFamiliarity();
+      if (familiarity != null){
+            $.ajax({
+              type: "POST",
+              url: "/complete/",
+              data: {
+                  'compType': compType,
+                  'matchupNames': JSON.stringify(matchupNames),
+                  'choices': JSON.stringify(choices),
+                  'TTChoose': JSON.stringify(TTChoose),
+                  'Time': JSON.stringify(Date()),
+                  'username': username,
+                  'familiarity': JSON.stringify(familiarity),
+                  'csrfmiddlewaretoken': csrftoken
+                },
+                success: surveySuccess,
+                dataType: 'html'
+            });
+        }
+        else {
+            alert("You must select Yes or No.")
+        }
     };
 });
 
@@ -297,6 +323,11 @@ function surveySuccess(data, textStatus, jqXHR){
         $("body").append(data[i])
     }
     getTopChoices();
+}
+
+function getFamiliarity() {
+    var val = $("input:radio[name=familiarity]:checked").val();
+    return val
 }
 
 // get mode including ties of an array
@@ -336,5 +367,13 @@ function getTopChoices(mode){
     };
     var second = getMode(choices)
     $("#test2").text(second[0])
+    // stop the survey if not valid number result
+    console.log(first[0])
+    if (compType == "numbers"){
+        if (first[0] != 1703 || second[0] != 1498){
+            $("form").empty()
+            $("form").append("<h2>Something Went Wrong!</h2>")
+        }
+    }
 }
     

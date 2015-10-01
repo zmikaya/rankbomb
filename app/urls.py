@@ -14,5 +14,6 @@ urlpatterns = patterns('',
         url(r'colors/', views.colors),
         url(r'places/', views.places),
         url(r'numbers/', views.numbers),
+        url(r'presidents/', views.presidents),
         url(r'data/', views.data, name='data'),
         )

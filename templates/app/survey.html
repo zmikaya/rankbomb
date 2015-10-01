@@ -7,6 +7,7 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,300,600' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
         <script src="{% static "js/jquery-1.11.2.min.js" %}"></script>
+        <script src="{% static "js/bootstrap.min.js" %}"></script>
     
     </head>
     <body ng-app="rankBomb" ng-controller="MainCtrl" class="ng-scope">
@@ -39,18 +40,55 @@
           <progress value="0" max="10">Completed: </progress>
           <div id="completed">0 out of  10 completed.</div>
         </div>
-        <!--modal box to obtain name or username-->
-        <div id="openModal" class="modalDialog">
-            <div>
-              <h1><b class="modalHeading">{{ CType }}</b></h1><br>
-                <h2 class="removeAfterEnter" style="color:#31324c">Please enter a name or username of your choice.</h2>
-                  <input style="margin-bottom:5px" type="text" class="form-control removeAfterEnter" id="username" name="username">
-                  <div class="btn-group">
-                    <a id="start"><input type="submit" class="btn btn-default download" value="start"></a>
-                  </div>
+        
+        <div id="familiarityDiv">
+          <h2>Were you familiar with all of the items in this section? </h2>
+          <input class="familiarity" type="radio" name="familiarity" value="1"><b>Yes</b><br>
+          <input class="familiarity" type="radio" name="familiarity" value="0"><b>No</b><br>
+            <div class="btn-group">
+              <a id="done"><input type="submit" class="btn btn-default" value="done"></a>
             </div>
         </div>
-      <!--Script placed here to avoid load issues-->
+        <!--modal box to obtain name or username-->
+        {% if not username %}
+          <div id="openModal" class="modalDialog">
+              <div>
+                <h1><b class="modalHeading">{{ CType }}</b></h1><br>
+                  <h2 class="removeAfterEnter" style="color:#31324c">Please enter a name or username of your choice.</h2>
+                    <input style="margin-bottom:5px" type="text" class="form-control removeAfterEnter" id="username" name="username">
+                    <div class="btn-group">
+                      <a id="start"><input type="submit" class="btn btn-default download" value="start"></a>
+                    </div>
+              </div>
+          </div>
+        {% endif %}
+        
+        <!--Username is passed on to each page-->
+        {% if username %}
+          <input id="username" type="hidden" value="{{username}}">
+          <div id="openModal" class="modalDialog">
+              <div>
+                <h1><b class="modalHeading">{{ CType }}</b></h1><br>
+                  <!--<h2 class="removeAfterEnter" style="color:#31324c">Please enter a name or username of your choice.</h2>-->
+                    <!--<input style="margin-bottom:5px" type="text" class="form-control removeAfterEnter" id="username" name="username">-->
+                    <div class="btn-group">
+                      <a id="start"><input type="submit" class="btn btn-default download" value="start"></a>
+                    </div>
+              </div>
+          </div>
+        {% endif %}
+        <!--modal box to obtain familiarity-->
+        <!--<div id="openModalFamil" class="modalDialog">-->
+        <!--      <div>-->
+        <!--          <h2 class="removeAfterEnter" style="color:#31324c">Were you familiar with all of the items in this section? </h2>-->
+        <!--          <input class="familiarity" type="radio" name="familiarity" value="1"><b><font color="#31324c">Yes</font></b><br>-->
+        <!--          <input class="familiarity" type="radio" name="familiarity" value="0"><b><font color="#31324c">No</font></b><br>-->
+        <!--            <div class="btn-group">-->
+        <!--              <a id="done"><input type="submit" class="btn btn-default download" value="done"></a>-->
+        <!--            </div>-->
+        <!--      </div>-->
+        <!--  </div>-->
+      <!--Script placed here to avoid loadi ssues-->
       <script src="{% static "js/script.js" %}"></script>
     </body>
 </html>
