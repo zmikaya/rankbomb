@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import django
 import os
 from app.models import choiceData
+from app.models import userInfo
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -11,6 +12,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 import csv
 import ast
 import json
+import random
 from ipware.ip import get_real_ip
 # Create your views here.
 
@@ -55,7 +57,7 @@ def colors(request):
     
 @ensure_csrf_cookie
 def places(request):
-    context_dict = {'CType': 'Choose the better place'}
+    context_dict = {'CType': 'Choose the place that is more beautiful'}
     context_dict["username"] = get_username(request)
     return render(request, 'app/survey.html', context_dict)
     
@@ -96,6 +98,11 @@ def complete(request):
         results = ['test1', 'test2']
         # valid = validateHuman(
         ctype, num_ctype, next_ctype_index = get_next_ctype(compType)
+        # set validation data for Amazon payment
+        if ctype == "end":
+            secret_code = set_user_info(username)
+            context_dict = {'results': results, 'next_ctype': ctype, 'username': username, 'num_ctype': num_ctype, 'completed': next_ctype_index, 'secret_code': secret_code}
+            return render(request, 'app/complete_ajax.html', context_dict)
         context_dict = {'results': results, 'next_ctype': ctype, 'username': username, 'num_ctype': num_ctype, 'completed': next_ctype_index}
         return render(request, 'app/complete_ajax.html', context_dict)
         
@@ -150,6 +157,25 @@ def data(request):
                 writer.writerow(row)
         return response
         
+@login_required
+def user_info(request):
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'choice.settings')
+    django.setup()
+    if request.method == "POST":
+        # Create the HttpResponse object with the appropriate CSV header.
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="user_info.csv"'
+        writer = csv.writer(response)
+        writer.writerow(["username", "num test", "secret code"])
+        data = userInfo.objects.all()
+        for user in data:
+            username = user.username
+            number_test = user.number_test
+            secret_code = user.secret_code
+            row = [username, number_test, secret_code]
+            writer.writerow(row)
+    return response
+        
 def get_next_ctype(last_ctype):
     ctype_list = ["numbers", "movies", "presidents", "places", "musicians", "math", "rappers", "soccer"]
     next_ctype_index = ctype_list.index(last_ctype) + 1
@@ -170,4 +196,24 @@ def update_familiarity(request, ctype):
         username = request.POST["username"]
         # get the last_ctype for filtering purposes
         last_ctype = get_last_ctype(ctype)
+    
+def set_user_info(username):
+    # setup django to work with the database
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'choice.settings')
+    django.setup()
+    # create the randomly generated secret code for Amazon MTurk
+    secret_code = ''.join(random.choice('0123456789ABCDEF') for i in range(10))
+    # get the data for a given username and the numbers survey
+    num_data = choiceData.objects.filter(username=username, compType="numbers")[0]
+    matchups = ast.literal_eval(num_data.matchupNames)
+    choices = [int(element) for element in ast.literal_eval(num_data.choices)]
+    num_valid = True
+    for i in range(len(choices)):
+        if choices[i] != max(int(matchups[i][0]), int(matchups[i][1])):
+            num_valid = False
+            break
+    # save the userInfo to the database
+    u = userInfo(username=username, number_test=num_valid, secret_code=secret_code)
+    u.save()
+    return secret_code
     

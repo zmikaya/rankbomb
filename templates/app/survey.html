@@ -8,7 +8,7 @@
         <link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
         <script src="{% static "js/jquery-1.11.2.min.js" %}"></script>
         <script src="{% static "js/bootstrap.min.js" %}"></script>
-    
+
     </head>
     <body ng-app="rankBomb" ng-controller="MainCtrl" class="ng-scope">
         <div class="page-header ng-binding ng-scope">
@@ -25,7 +25,7 @@
               </figure>
               </form>
             </td>
-      
+
             <td>
               <form ng-submit="choose(1)" class="ng-pristine ng-valid ng-submitted">
               <figure>
@@ -36,11 +36,11 @@
               </figure>
               </form>
             </td>
-          </tr></tbody></table> 
+          </tr></tbody></table>
           <progress value="0" max="10">Completed: </progress>
           <div id="completed">0 out of  10 completed.</div>
         </div>
-        
+
         <div id="familiarityDiv">
           <h2>Were you familiar with all of the items in this section? </h2>
           <input class="familiarity" type="radio" name="familiarity" value="1"><b>Yes</b><br>
@@ -54,7 +54,7 @@
           <div id="openModal" class="modalDialog">
               <div>
                 <h1><b class="modalHeading">{{ CType }}</b></h1><br>
-                  <h2 class="removeAfterEnter" style="color:#31324c">Please enter a name or username of your choice.</h2>
+                  <h2 class="removeAfterEnter" style="color:#31324c">Please enter your Amazon Worker ID so we can approve your work.</h2>
                     <input style="margin-bottom:5px" type="text" class="form-control removeAfterEnter" id="username" name="username">
                     <div class="btn-group">
                       <a id="start"><input type="submit" class="btn btn-default download" value="start"></a>
@@ -62,7 +62,7 @@
               </div>
           </div>
         {% endif %}
-        
+
         <!--Username is passed on to each page-->
         {% if username %}
           <input id="username" type="hidden" value="{{username}}">

@@ -16,4 +16,5 @@ urlpatterns = patterns('',
         url(r'numbers/', views.numbers),
         url(r'presidents/', views.presidents),
         url(r'data/', views.data, name='data'),
+        url(r'userinfo/', views.user_info),
         )

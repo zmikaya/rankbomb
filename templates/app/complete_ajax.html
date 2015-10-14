@@ -26,12 +26,9 @@
         </div>
       </div>
     {% else %}
-      <form class="form-signin" action="/{{next_ctype}}/#openModal" method="post">
-        {% csrf_token %}
-   			<input type="hidden" name="username" value="{{username}}"><br><br>
-   			<input type="submit" class="btn btn-sm btn-default" value="Press to Complete">
-      </form>
+
       <h2>The End!</h2>
       <h2>Thank you for your participation.</h2>
+      <h2>The survey code is: {{secret_code}}.</h2>
     {% endif %}
 </div>

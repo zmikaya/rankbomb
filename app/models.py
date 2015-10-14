@@ -14,3 +14,11 @@ class choiceData(models.Model):
 
     class Meta:
       verbose_name_plural = "Choice Data"
+      
+class userInfo(models.Model):
+  username = models.CharField(max_length=128)
+  number_test = models.BooleanField()
+  secret_code = models.CharField(max_length=128, default=None)
+  
+  class Meta:
+      verbose_name_plural = "User Info"
